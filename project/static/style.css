@@ -1,0 +1,60 @@
+.sign_in{
+	background-color: #000;
+	margin-top: 10px;
+	margin-left: 520px;
+	color: #0e8d4a;
+	border: 2px solid #0e8d4a;
+}
+.sign_up{
+	background-color: #000;
+	margin-top: 10px;
+	margin-left: 30px;
+	color: #0e8d4a;
+	border: 2px solid #0e8d4a;
+}
+.nav li{
+	color: #fff;
+}
+.for-lecturers{
+	height: 350px;
+	width: 49%;
+	background-image: url("img/b.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+	cursor: pointer;
+}
+.for-lecturers:hover{
+	opacity: ;
+}
+.for-students{
+	height: 350px;
+	width: 49%;
+	margin-left: 20px;
+	background-image: url("img/c.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+	cursor: pointer;
+}
+.for-students:hover{
+	opacity: ;
+}
+#student-stuff{
+	margin-top: 60px;
+	opacity: 0;
+	transition: 0.5s ease;
+	font-size: 15px;
+}
+.for-students:hover #student-stuff{
+	opacity: 0.9;
+}
+#lecturer-stuff{
+	margin-top: 60px;
+	opacity: 0;
+	transition: 0.5s ease;
+	font-size: 15px;
+}
+.for-lecturers:hover #lecturer-stuff{
+	opacity: 0.9;
+}
