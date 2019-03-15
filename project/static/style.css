@@ -58,3 +58,23 @@
 .for-lecturers:hover #lecturer-stuff{
 	opacity: 0.9;
 }
+.side{
+	background-color: #f7f1f1;
+	border-right: 1px solid #ccc;
+	height: 640px;
+	margin-top: 50px;
+}
+#menu{
+	margin-top: 50px;
+}
+#menu ul{
+	list-style-type: none;
+}
+#menu li{
+	margin:	20px 0px 20px 0px;
+	font-weight: bold;
+}
+#menu a{
+	text-decoration-line: none;
+	color: #000;
+}

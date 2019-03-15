@@ -8,6 +8,10 @@ from project import db
 def index():
 	return render_template("index.html", title="Home")
 
+@app.route('/lecturer_home')
+def lecturer_home():
+	return render_template("lecturer_home.html", title="Lecturer Home")
+
 
 @app.route('/admin')
 def admin():
