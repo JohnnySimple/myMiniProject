@@ -31,6 +31,19 @@
 		font-size: 12px;
 	}
 </style>
+
+<div class="container-fluid first-cont">
+	<div class="row">
+		<div class="col-md-5" style="margin-top: 170px;">
+			<h1 style="font-size: 60px;">Advance in class<br>communication</h1>
+			<p style="font-size: 20px;">
+				Simpleclass brings about a learning <br /> management system
+				to improve the <br /> sharing of information between lecturers and their
+				students.
+			</p>
+		</div>
+	</div>
+</div>
 <div class="container" align="center">
 	<h1 style="color: #000;">What is this website?</h1>
 	<p id="objective">This website is a platform that allows lecturers to upload<br /> course materials for students, manage assignments and <br />
@@ -45,7 +58,7 @@
 			<div align="center">
 				<h2>FOR LECTURERS</h2>
 				<div id="lecturer-stuff">
-					<p>
+					<p id="lecturer-statement">
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br/>
 						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br/>
 						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -54,20 +67,47 @@
 						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</p>
 					<button class="btn code-btn" data-toggle="modal" data-target="#myModal">LOGIN</button>
+					<!-- beginning of modal for lecturer login -->
 					<div class="modal mod" id="myModal">
 						<div class="modal-dialog modal-sm">
 							<div class="modal-content">
 								
 								<div class="modal-header">
 									<button class="close" data-dismiss="modal">x</button>
-									<h1 class="modal-title">Lecturer Login</h1>
+									<h3 class="modal-title">Lecturer Login</h3>
 								</div>
 
 								<div class="modal-body">
 
-									<form class="form">
-		                           	<input type="text" name="username" placeholder="username" class="form-control">
-		                           	<input type="password" name="password" placeholder="password" class="form-control">
+									<form class="form" method="POST" action="">
+										{{ lec_form.hidden_tag() }}
+										<div class="form-group">
+											{% if lec_form.lec_username.errors %}
+											    {{ lec_form.lec_username(class="form-control form-control-lg is-invalid", placeholder="Username") }}
+													<div class="invalid-feedback">
+														{% for error in lec_form.lec_username.errors %}
+															<span>{{ error }}</span>
+														{% endfor %}
+													</div>
+												{% else %}
+													{{ lec_form.lec_username(class="form-control form-control-lg", placeholder="Username") }}
+												{% endif %}
+										</div>
+										<div class="form-group">
+											{% if lec_form.lec_password.errors %}
+											    {{ lec_form.lec_password(class="form-control form-control-lg is-invalid", placeholder="Username") }}
+													<div class="invalid-feedback">
+														{% for error in lec_form.lec_password.errors %}
+															<span>{{ error }}</span>
+														{% endfor %}
+													</div>
+												{% else %}
+													{{ lec_form.lec_password(class="form-control form-control-lg", placeholder="Password") }}
+												{% endif %}
+										</div>
+			                           	<div class="form-group">
+									  		{{ lec_form.submit(class="btn btn-success") }}
+									  	</div>
 		                           </form>
 
 								</div>
@@ -80,6 +120,7 @@
 							
 						</div>
 					</div>
+					<!-- end of modal for lecturer login -->
 				</div>
 			</div>
 		</div>
@@ -87,7 +128,7 @@
 			<div align="center">
 				<h2>FOR STUDENTS</h2>
 				<div id="student-stuff">
-					<p>
+					<p id="student-statement">
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br/>
 						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br/>
 						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -95,7 +136,50 @@
 						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</p>
-					<button class="btn code-btn">ENTER ACCESS CODE</button>
+					<button class="btn code-btn" data-toggle="modal" data-target="#secondModal">ENTER ACCESS CODE</button>
+
+					<!-- beginning of modal for students' access code -->
+					<div class="modal mod" id="secondModal">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal">x</button>
+									<h3 class="modal-title">Lecturer Login</h3>
+								</div>
+
+								<div class="modal-body">
+
+									<form class="form" method="POST" action="">
+										{{ access_code.hidden_tag() }}
+										<div class="form-group">
+											{% if access_code.code.errors %}
+											    {{ access_code.code(class="form-control form-control-lg is-invalid", placeholder="Enter code") }}
+													<div class="invalid-feedback">
+														{% for error in access_code.code.errors %}
+															<span>{{ error }}</span>
+														{% endfor %}
+													</div>
+												{% else %}
+													{{ access_code.code(class="form-control form-control-lg", placeholder="Enter code") }}
+												{% endif %}
+										</div>
+			                           	<div class="form-group">
+									  		{{ access_code.submit(class="btn btn-success") }}
+									  	</div>
+		                           </form>
+
+								</div>
+
+								<div class="modal-footer">
+									
+								</div>
+
+							</div>
+							
+						</div>
+					</div>
+					<!-- end of modal for students' access code -->
 				</div>
 			</div>
 		</div>
@@ -116,6 +200,15 @@
 		$(".for-students").hover(function(){
 			$("#student-stuff").toggle(1000);
 		});*/
+		$("#lecturer-statement").hide();
+		$(".for-lecturers").hover(function(){
+			$("#lecturer-statement").fadeToggle('slow');
+		});
+
+		$("#student-statement").hide();
+		$(".for-students").hover(function(){
+			$("#student-statement").fadeToggle('slow');
+		});
 	});
 </script>
 

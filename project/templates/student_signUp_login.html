@@ -1,0 +1,163 @@
+{% extends "navbar.html" %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+	.sign-up-form{
+		width: 60%;
+		margin-left: 29%;
+	}
+	.login-form{
+		width: 60%;
+		margin-right: 30%;
+	}
+	.divider{
+		border-left : 1px solid #ccc;
+		height: 360px;
+	}
+	.cont{
+		margin-top: 100px;
+	}
+</style>
+
+
+<div class="container cont">
+	<div class="row">
+		<div class="col-md-5">
+			<div class="form sign-up-form">
+				<h1 style="padding-bottom:10px;border-bottom:1px solid #ccc;margin-bottom:50px;">Sigh Up</h1>
+				<form class="form-group" method="POST" action="">
+					{{ form.hidden_tag() }}
+
+					<fieldset>
+						<div class="form-group">
+							<!--{{ form.name.label(class="form-control-label") }}-->
+							{% if form.name.errors %}
+								{{ form.name(class="form-control form-control-lg is-invalid", placeholder="name") }}
+								<div class="invalid-feedback">
+									{% for error in form.name.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.name(class="form-control form-control-lg", placeholder="name") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{% if form.username.errors %}
+								{{ form.username(class="form-control form-control-lg is-invalid", placeholder="username") }}
+								<div class="invalid-feedback">
+									{% for error in form.username.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.username(class="form-control form-control-lg", placeholder="username") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{% if form.email.errors %}
+								{{ form.email(class="form-control form-control-lg is-invalid", placeholder="Email") }}
+								<div class="invalid-feedback">
+									{% for error in form.email.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{% if form.password.errors %}
+								{{ form.password(class="form-control form-control-lg is-invalid", placeholder="Password") }}
+								<div class="invalid-feedback">
+									{% for error in form.password.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.password(class="form-control form-control-lg", placeholder="Passsword") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{% if form.confirm_password.errors %}
+								{{ form.confirm_password(class="form-control form-control-lg is-invalid", placeholder="Confirm password") }}
+								<div class="invalid-feedback">
+									{% for error in form.confirm_password.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.confirm_password(class="form-control form-control-lg", placeholder="Confirm password") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{% if form.lec_access_code.errors %}
+								{{ form.lec_access_code(class="form-control form-control-lg is-invalid", placeholder="lec_access_code") }}
+								<div class="invalid-feedback">
+									{% for error in form.lec_access_code.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.lec_access_code(class="form-control form-control-lg", placeholder="lecturer access code") }}
+							{% endif %}
+						</div>
+					</fieldset>
+					<div class="form-group">
+						{{ form.submit(class="btn btn-primary") }}
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-1 ">
+			<div class="divider">
+				
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form login-form">
+				<h1 style="padding-bottom:10px;border-bottom:1px solid #ccc;margin-bottom:50px;">Login</h1>
+				<form class="form-group" method="POST" action="">
+					{{ login_form.hidden_tag() }}
+
+					<fieldset>
+						<div class="form-group">
+							<!--{{ login_form.student_username.label(class="form-control-label") }}-->
+							{% if login_form.student_username.errors %}
+								{{ login_form.student_username(class="form-control form-control-lg is-invalid", placeholder="username") }}
+								<div class="invalid-feedback">
+									{% for error in login_form.student_username.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ login_form.student_username(class="form-control form-control-lg", placeholder="username") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							<!--{{ login_form.student_password.label(class="form-control-label") }}-->
+							{% if login_form.student_password.errors %}
+								{{ login_form.student_password(class="form-control form-control-lg is-invalid", placeholder="password") }}
+								<div class="invalid-feedback">
+									{% for error in login_form.student_password.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ login_form.student_password(class="form-control form-control-lg", placeholder="password") }}
+							{% endif %}
+						</div>
+					</fieldset>
+					<div class="form-group">
+						{{ login_form.submit(class="btn btn-primary") }}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

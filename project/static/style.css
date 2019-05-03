@@ -1,3 +1,11 @@
+
+.first-cont{
+	height: 650px;
+	width: 100%;
+	background-image: url("img/auth_bg.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
 .sign_in{
 	background-color: #000;
 	margin-top: 10px;
@@ -21,11 +29,7 @@
 	background-image: url("img/b.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
-	opacity: 0.7;
 	cursor: pointer;
-}
-.for-lecturers:hover{
-	opacity: ;
 }
 .for-students{
 	height: 350px;
@@ -34,29 +38,18 @@
 	background-image: url("img/c.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
-	opacity: 0.7;
 	cursor: pointer;
-}
-.for-students:hover{
-	opacity: ;
 }
 #student-stuff{
 	margin-top: 60px;
-	opacity: 0;
 	transition: 0.5s ease;
 	font-size: 15px;
 }
-.for-students:hover #student-stuff{
-	opacity: 0.9;
-}
+
 #lecturer-stuff{
 	margin-top: 60px;
-	opacity: 0;
 	transition: 0.5s ease;
 	font-size: 15px;
-}
-.for-lecturers:hover #lecturer-stuff{
-	opacity: 0.9;
 }
 .side{
 	background-color: #f7f1f1;
@@ -77,4 +70,24 @@
 #menu a{
 	text-decoration-line: none;
 	color: #000;
+}
+.modal{
+	color: #000;
+}
+.modal input{
+	margin: 20px 0px 20px 0px;
+}
+.lecturer_home_middle_column{
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+.lec_column{
+	height: 500px;
+}
+.student_home_middle_column{
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+.stud_column{
+	height: 500px;
 }

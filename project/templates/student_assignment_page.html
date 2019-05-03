@@ -1,0 +1,44 @@
+{% extends "student_home_sidebar.html" %}
+
+{% block content %}
+
+<style type="text/css">
+.student_home_left_column{
+	margin-top: 60px;
+}
+#student-side-menu{
+	margin-left: 120px;
+}
+#student-side-menu li{
+	margin: 5px 0px 5px 5px;
+	list-style-type: none;
+}	
+#student-side-menu a{
+	text-decoration-line: none;
+}
+</style>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 student_home_left_column stud_column">
+			<div id="student-side-menu">
+				<li><a href=""><span class="glyphicon glyphicon-book"></span>   Course materials</a></li>
+				<li><a href=""><span class="glyphicon glyphicon-edit"></span>   Assignments</a></li>
+				<li><a href=""><span class="glyphicon glyphicon-record"></span>   Announcements</a></li>
+			</div>
+		</div>
+		<div class="col-md-5 student_home_middle_column stud_column">
+			<h4 style="border-bottom: 1px solid #ccc;">{{ assignments.id }}</h4>
+			
+		</div>
+		<div class="col-md-4 lecturer_home_right_column stud_column">
+			<h4 style="width: 200px; border-bottom: 1px solid #ccc;">Reminders</h4>
+			You don't have any reminders.
+			<h4 style="width: 200px; border-bottom: 1px solid #ccc;">Assignments</h4>
+					
+		</div>
+		
+	</div>
+</div>
+
+{% endblock content %}

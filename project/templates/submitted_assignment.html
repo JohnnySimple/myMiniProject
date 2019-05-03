@@ -1,0 +1,64 @@
+{% extends "lecturer_home_sidebar.html" %}
+
+{% block content %}
+
+<style type="text/css">
+	#menu li{
+		color: blue;
+	}
+	.assignments-div{
+		width: 20%;
+	}
+	.assignments-div li{
+		list-style-type: none;
+	}
+</style>
+
+<div class="container">
+    <div align="center" style="margin-top: 0px; width: 100%;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+    </div>    
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 lecturer_home_left_column lec_column">
+			
+			<div id="menu" align="right">
+				<ul>
+					<a href=""><li>Submissions</li></a>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-5 lecturer_home_middle_column lec_column">
+			<h4 style="border-bottom: 1px solid #ccc;">Submitted assignments (click to download)</h4>
+			<div class="assignments-div" style="width: 100%">
+				{% if assignments == [] %}
+					No assignments have been submitted.
+				{% else %}
+					{% for a in assignments %}
+						{% if users.query.filter_by(id=a.sender_id).first().accessCode == current_user.accessCode %}
+							<a href="{{ url_for('return_files', content=a.name) }}"><li>{{ a.name }}</li></a><br />
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-md-4 lecturer_home_right_column lec_column">
+			<h4 style="width: 200px; border-bottom: 1px solid #ccc;">Reminders</h4>
+			You don't have any reminders.
+			<h4 style="width: 200px; border-bottom: 1px solid #ccc;">Upcoming</h4>
+			No upcoming quizzes.
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}

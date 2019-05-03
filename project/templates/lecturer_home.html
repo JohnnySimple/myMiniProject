@@ -2,8 +2,195 @@
 
 {% block content %}
 
+<style type="text/css">
+	#lec_home_menu{
+		margin-left: 100px;
+		margin-top: 50px;
+		margin-bottom: 100px;
+	}
+	#lec_home_menu li{
+		color: blue;
+		list-style-type: none;
+	}
+	.assignment-delete{
+		cursor: pointer;
+	}
+</style>
 
+<div class="container">
+    <div align="center" style="margin-top: 0px; width: 100%;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+    </div>    
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 lecturer_home_left_column lec_column">
+			<h3>welcome {{ current_user.username }}</h3>
+			<div id="lec_home_menu">
+				<ul>
+					<a href=""><li>Profile</li></a>
+					<a href="{{ url_for('submitted_assignment') }}"><li>Submissions</li></a>
+				</ul>
+			</div>
 
+			<div style="margin-left: 140px;">
+				<h4>Student size</h4>
+				<hr style="width: 50%;margin-right: 80px;">
+					{% if students_num == 0 %}
+						No registered students
+					{% elif students_num == 1 %}
+						<p>{{ students_num }} student.</p>
+					{% else %}
+						<p>{{ students_num }} students.</p>
+					{% endif %}
+			</div>
+		</div>
+		<div class="col-md-5 lecturer_home_middle_column lec_column">
+			<h4>Recent Activity</h4>
+			<hr>
+			<ul class="nav nav-tabs">
+				<!-- <li class="active"><a href="#">Home</a></li> -->
+				<li class="active"><a href="#update" data-toggle="tab">Update</a></li>
+				<li><a href="#assignment" data-toggle="tab"><span class="glyphicon glyphicon-assignment"></span> Assignment</a></li>
+				<li><a href="#course-material" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> Course material</a></li>
+			</ul>
+			<!-- Tab Content -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="update">
+					<div class="form">
+						<form style="margin-top: 20px;" class="form-group" method="POST">
+							 {{ update_form.hidden_tag() }} 
+							<!-- <textarea rows="3" placeholder="Write an update" class="form-control"></textarea> -->
+							<div class="form-group">
+									{% if update_form.content.errors %}
+										{{ update_form.content(class="form-control form-control-lg is-invalid", placeholder="write an update") }}
+										<div class="invalid-feedback">
+											{% for error in update_form.content.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% else %}
+										{{ update_form.content(rows="4", class="form-control form-control-lg", placeholder="write an update...") }}
+									{% endif %}
+							</div>
+							<div class="form-group">
+							  	{{ update_form.submit(class="btn btn-success") }}
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="tab-pane" id="assignment">
+					<div class="form">
+						<form style="margin-top: 20px;" class="form-group" method="POST">
+							{{ assignment_form.hidden_tag() }}
 
+							<div class="form-group">
+								Assignment name:
+									{% if assignment_form.topic.errors %}
+										{{ assignment_form.topic(class="form-control form-control-lg is-invalid", placeholder="assignment title") }}
+										<div class="invalid-feedback">
+											{% for error in assignment_form.topic.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% else %}
+										{{ assignment_form.topic(class="form-control form-control-lg", placeholder="topic of assignment") }}
+									{% endif %}
+							</div>
+							<div class="form-group">
+								Description:
+									{% if assignment_form.description.errors %}
+										{{ assignment_form.description(class="form-control form-control-lg is-invalid", placeholder="assignment description") }}
+										<div class="invalid-feedback">
+											{% for error in assignment_form.description.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% else %}
+										{{ assignment_form.description( rows="4", class="form-control form-control-lg", placeholder="description of assignment") }}
+									{% endif %}
+							</div>
+							<div class="form-group">
+								Date of Submission:
+									{% if assignment_form.due_date.errors %}
+										{{ assignment_form.due_date(class="form-control form-control-lg is-invalid", placeholder="assignment due_date") }}
+										<div class="invalid-feedback">
+											{% for error in assignment_form.due_date.errors %}
+												<span>{{ error }}</span>
+											{% endfor %}
+										</div>
+									{% else %}
+										{{ assignment_form.due_date(type="date", class="form-control form-control-lg", placeholder="due date of assignment") }}
+									{% endif %}
+							</div>
+							<div class="form-group">
+							  	{{ assignment_form.submit(class="btn btn-success") }}
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="tab-pane" id="course-material">
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 lecturer_home_right_column lec_column">
+			<h4 style="width: 200px; border-bottom: 1px solid #ccc; padding: 10px;">Reminders</h4>
+			You don't have any reminders.
+			<h4 style="width: 200px; border-bottom: 1px solid #ccc; padding: 10px;">Posted Assignments</h4>
+			{% if ass_posted == [] %}
+				You don't have any assignments to receive.
 
+			{% else %}
+				<table class="table table-stripped table-bordered table-hover">
+				<tr>
+					<td></td>
+					<td>Topic</td>
+				</tr>
+				{% for assignment in ass_posted %}
+				<tr>
+					<td>
+					<form class="icon" method="POST" action="{{url_for('remove', ass_id=assignment.id)}}">
+						<button onclick="return confirm('Are you sure you want to delete?');" title="Delete record"><span class="glyphicon glyphicon-trash assignment-delete"
+					 ></span></button>
+					</form>
+					</td>
+
+					<td>{{ assignment.topic }}</td>
+					{% if ans == True %}
+						{{ assignments.query.filter_by(id=assignment.id).delete() }}
+					{% endif %}
+				</tr>
+				{% endfor %}
+				</table>
+					
+			{% endif %}
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		// $(".assignment-delete").click(function(){
+		// 	var answer = confirm('Are you sure you want to delete?');
+
+		// 	if (answer == true) {
+		// 	alert('You chose ok');
+		// 	}
+
+		// });
+
+		
+
+	});
+</script>
 {% endblock content %}
